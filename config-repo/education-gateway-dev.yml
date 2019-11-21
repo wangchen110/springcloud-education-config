@@ -1,0 +1,19 @@
+server:
+  port: 10010
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: education-server
+        uri: lb://education-service
+        order: 0
+        predicates:
+        - Path=/education-service/**
+        filters:
+        - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
